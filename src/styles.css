@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --color-onyx: #1a1614;
+  --color-onyx-elevated: #24201e;
+  --color-gold: #c5a059;
+  --color-gold-soft: #d4b47a;
+  --color-ivory: #f9f7f2;
+  --color-ivory-muted: #d4d1cc;
+  
+  --font-display: "Libre Baskerville", serif;
+  --font-sans: "Montserrat", sans-serif;
+}
+
+:root {
+  --background: #1a1614;
+  --foreground: #f9f7f2;
+  --onyx: #1a1614;
+  --gold: #c5a059;
+  --ivory-muted: #d4d1cc;
+  
+  --card: #24201e;
+  --card-foreground: #f9f7f2;
+  --popover: #1a1614;
+  --popover-foreground: #f9f7f2;
+  --primary: #c5a059;
+  --primary-foreground: #1a1614;
+  --secondary: #24201e;
+  --secondary-foreground: #f9f7f2;
+  --muted: #24201e;
+  --muted-foreground: #d4d1cc;
+  --accent: #c5a059;
+  --accent-foreground: #1a1614;
+  --destructive: #ef4444;
+  --destructive-foreground: #f9f7f2;
+  --border: rgba(197, 160, 89, 0.2);
+  --input: rgba(197, 160, 89, 0.2);
+  --ring: #c5a059;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-color: var(--background);
+  }
+}
+
+@layer components {
+  .label-caps {
+    @apply text-[0.65rem] uppercase tracking-[0.25em] font-medium;
+  }
+
+  .eyebrow {
+    @apply text-gold label-caps mb-4 block;
+  }
+
+  .hairline {
+    @apply h-px bg-gold/20 w-full;
+  }
+
+  .hairline-draw {
+    @apply scale-x-0 origin-left transition-transform duration-1000 ease-out;
+  }
+
+  .gold-text {
+    @apply text-gold;
+  }
+
+  .ghost-gold-btn {
+    @apply inline-flex items-center px-8 py-3.5 border border-gold/40 text-gold label-caps 
+           hover:bg-gold hover:text-onyx transition-all duration-500 ease-out;
+  }
+
+  .reveal-up {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+}
+
+/* Animations */
+.hairline-draw.active {
+  @apply scale-x-100;
+}
+
+.reveal-up.active {
+  @apply opacity-100 translate-y-0;
+}
