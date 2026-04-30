@@ -1,4 +1,4 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
 
 import { CartProvider } from "@/cart/CartContext";
 import { CartDrawer } from "@/cart/CartDrawer";
