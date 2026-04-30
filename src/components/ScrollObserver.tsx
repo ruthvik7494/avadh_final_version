@@ -21,20 +21,35 @@ export function ScrollObserver() {
       });
     }, observerOptions);
 
-    // Target elements with reveal or draw classes
-    const targets = document.querySelectorAll(".reveal-up, .hairline-draw");
-    targets.forEach((target) => {
-      // If element is already in view or above the fold, activate it immediately
-      const rect = target.getBoundingClientRect();
-      if (rect.top < window.innerHeight) {
-        target.classList.add("active");
-      } else {
-        observer.observe(target);
-      }
+    const scan = () => {
+      const targets = document.querySelectorAll(".reveal-up, .hairline-draw");
+      targets.forEach((target) => {
+        const rect = target.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          target.classList.add("active");
+        } else {
+          observer.observe(target);
+        }
+      });
+    };
+
+    // Initial scan
+    scan();
+
+    // Secondary scan after a short delay for React rendering
+    const timer = setTimeout(scan, 100);
+
+    // Watch for new elements being added
+    const mutationObserver = new MutationObserver(() => {
+      scan();
     });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       observer.disconnect();
+      mutationObserver.disconnect();
+      clearTimeout(timer);
     };
   }, [location.pathname]); // Re-run when navigation happens
 

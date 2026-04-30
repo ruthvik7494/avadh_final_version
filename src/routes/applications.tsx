@@ -389,3 +389,5 @@ function ApplicationsPage() {
     </main>
   );
 }
+
+export default ApplicationsPage;
